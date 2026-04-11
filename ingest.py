@@ -25,6 +25,8 @@ def main():
             f"and place data in {RAW_CSV_DATA_PATH}"
         )
 
+    # Creates parquet data path if doesn't exist. If it exists, we do nothing.
+    RAW_PARQUET_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     for csv_file_name in RAW_CSV_DATA_PATH.glob("*.csv"):
 
@@ -43,9 +45,6 @@ def main():
         # reducing memory footprint without losing precision
         for col in DATE_COLS:
             df[col] = df[col].astype("int16")
-
-        # Creates parquet data path if doesn't exist. If it exists, we do nothing.
-        parquet_file_name.parent.mkdir(parents=True, exist_ok=True)
 
         # Convert unprocessed CSV files to Parquet
         if parquet_file_name.exists():
