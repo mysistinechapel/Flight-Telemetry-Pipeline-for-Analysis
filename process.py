@@ -1,3 +1,26 @@
+"""
+Process telemetry Parquet files into a clean, time-ordered dataset.
+
+This stage transforms raw flight telemetry into a structured format suitable for
+feature engineering and analysis.
+
+Key steps:
+- Normalize column names
+- Construct a unified timestamp from date/time components
+- Sort records chronologically
+
+Input:
+- data/raw/parquet/
+
+Output:
+- data/processed/parquet/
+
+Design principles:
+- Lightweight transformation (no heavy cleaning)
+- Preserve raw signal behavior for downstream analysis
+"""
+
+
 import pandas as pd
 from pathlib import Path
 
@@ -32,6 +55,7 @@ def sort_and_clean(df):
     return df
 
 def main():
+    print("Starting process...")
 
     processed = 0
     skipped = 0
@@ -73,5 +97,6 @@ def main():
     print(f"Processed: {processed}")
     print(f"Skipped: {skipped}")
     print(f"Failed: {failed}")
+
 if __name__ == "__main__":
     main()

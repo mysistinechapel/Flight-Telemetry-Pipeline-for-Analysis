@@ -12,6 +12,7 @@ RAW_PARQUET_DATA_PATH = Path("data/raw/parquet/")
 DATE_COLS = ["DATE_YEAR", "DATE_MONTH", "DATE_DAY", "GMT_HOUR", "GMT_MINUTE", "GMT_SEC"]
 
 def main():
+    print("Starting ingest...")
 
     processed = 0
     skipped = 0
