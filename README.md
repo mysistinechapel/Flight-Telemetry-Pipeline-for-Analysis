@@ -48,3 +48,15 @@ This project focuses on building a structured pipeline that:
 
 ### Pipeline Execution
 - Provides a pipeline runner to execute all stages:
+
+
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+  A[Raw Telemetry Data] --> B[Ingest]
+  B --> C[Process Time Series]
+  C --> D[Feature Engineering]
+  D --> E[Flight Summary Dataset]
