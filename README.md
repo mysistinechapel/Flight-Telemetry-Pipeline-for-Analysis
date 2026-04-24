@@ -2,9 +2,9 @@
 
 ## Overview
 
-This project builds an end-to-end data pipeline for working with aviation telemetry data. The goal is to transform raw flight sensor data into a structured, analysis-ready dataset.
+This project builds an end-to-end data pipeline for processing aviation telemetry data. The goal is to transform raw flight sensor data into a structured, analysis-ready dataset suitable for downstream analytics and modeling.
 
-The pipeline processes raw telemetry files, standardizes time-series data, and generates flight-level features that capture both overall flight characteristics and dynamic behavior.
+The pipeline ingests raw telemetry files, standardizes time-series data, and generates flight-level features that capture both overall flight characteristics and dynamic behavior.
 
 ---
 
@@ -12,45 +12,31 @@ The pipeline processes raw telemetry files, standardizes time-series data, and g
 
 Telemetry data is inherently complex:
 
-- Sensors operate at different rates  
+- Sensors operate at different sampling rates  
 - Data includes both continuous signals (altitude, speed) and discrete states  
+- Missing or noisy data is common  
 - Raw data is not immediately suitable for analysis  
 
 This project focuses on building a structured pipeline that:
 
 - standardizes telemetry data  
 - preserves signal fidelity  
-- enables downstream analysis and modeling  
+- handles real-world data imperfections  
+- produces consistent, model-ready outputs  
 
 ---
 
-## What the pipeline currently does
+## Current Pipeline (Dagster-Orchestrated)
 
-### Ingest
-- Converts raw telemetry data into Parquet format  
-- Handles file-level processing and skip logic  
+The pipeline is implemented using **Dagster**, which provides:
 
-### Process
-- Normalizes column names  
-- Constructs a unified timestamp from date/time components  
-- Sorts data chronologically  
-- Removes invalid or incomplete records  
+- asset-based pipeline modeling  
+- dependency management  
+- observability (logs, metadata, execution tracking)  
+- reproducible execution  
 
-### Feature Engineering
-- Aggregates time-series data into one row per flight  
-- Generates summary features such as:
-  - flight duration  
-  - altitude statistics (max, mean, standard deviation, range)  
-  - airspeed statistics (true and ground speed mean and variability)  
-- Derives dynamic features capturing behavior over time:
-  - climb rate (max and variability)  
-  - speed change (max and variability)  
+Each stage is defined as a Dagster asset, forming a dependency graph:
 
-### Pipeline Execution
-- Provides a pipeline runner to execute all stages:
-
-
----
 
 ## Architecture
 
