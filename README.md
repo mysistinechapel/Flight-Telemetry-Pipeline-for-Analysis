@@ -45,7 +45,8 @@ flowchart TD
   A[Raw Telemetry Data] --> B[Ingest]
   B --> C[Process Time Series]
   C --> D[Feature Engineering]
-  D --> E[Flight Summary Dataset]
+  D --> E[Flight Summary Dataset]```
+
 
 ## Future Work
 
